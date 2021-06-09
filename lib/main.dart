@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:github_repo/app/home/home.page.dart';
 import 'package:github_repo/bloc/repository/repository_bloc.dart';
 import 'package:github_repo/enum/stateStatus.enum.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_repo/services/github.serice.dart';
+
+void setUpServices() {
+  GetIt.I.registerLazySingleton(() => GithubService());
+}
 
 void main() {
+  setUpServices();
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]).then((_) {
     runApp(MyApp());
