@@ -184,7 +184,7 @@ class Item {
   int? openIssues;
   int? watchers;
   String? defaultBranch;
-  int? score;
+  double? score;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
         id: json["id"],
