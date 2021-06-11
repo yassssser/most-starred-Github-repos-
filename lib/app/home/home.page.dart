@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:github_repo/app/common_widget/text_error.widget.dart';
 import 'package:github_repo/bloc/repository/repository_bloc.dart';
 import 'package:github_repo/enum/stateStatus.enum.dart';
@@ -52,7 +53,10 @@ class _HomePageState extends State<HomePage> {
             return Container();
           } else if (state.requestState == StateStatus.LOADING) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: SpinKitCubeGrid(
+                color: Colors.indigo[400],
+                size: 55.0,
+              ),
             );
           } else if (state.requestState == StateStatus.ERROR) {
             return TextErrorWidget(

@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:github_repo/enum/stateStatus.enum.dart';
 import 'package:github_repo/models/repository.model.dart';
 import 'package:github_repo/services/github.serice.dart';
-import 'package:meta/meta.dart';
 
 part 'repository_event.dart';
 part 'repository_state.dart';
@@ -20,7 +19,8 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
     RepositoryEvent event,
   ) async* {
     if (event is LoadRepositories) {
-      yield RepositoryState(requestState: StateStatus.LOADING);
+      yield RepositoryState(
+          requestState: StateStatus.LOADING, repositories: state.repositories);
 
       try {
         final Repositories data =

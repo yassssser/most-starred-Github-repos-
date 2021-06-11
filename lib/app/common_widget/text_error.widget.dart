@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TextErrorWidget extends StatelessWidget {
   final VoidCallback? actionEvent;
   String? errorMessage;
-  TextErrorWidget({@required this.actionEvent, @required this.errorMessage}) {}
+  TextErrorWidget({@required this.actionEvent, @required this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
