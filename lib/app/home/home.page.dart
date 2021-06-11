@@ -44,6 +44,11 @@ class _HomePageState extends State<HomePage> {
         title: Text("Trending Repos"),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _scrollController.animateTo(0,
+            duration: Duration(seconds: 1), curve: Curves.easeInCirc),
+        child: Icon(Icons.arrow_upward_rounded),
+      ),
       body: BlocBuilder<RepositoryBloc, RepositoryState>(
         builder: (context, state) {
           if (state.requestState == StateStatus.NONE) {
