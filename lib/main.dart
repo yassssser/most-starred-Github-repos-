@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -46,7 +47,12 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: AnimatedSplashScreen(
+          duration: 100,
+          splash: Image.asset("assets/images/github.png"),
+          nextScreen: HomePage(),
+          splashTransition: SplashTransition.rotationTransition,
+        ),
       ),
     );
   }

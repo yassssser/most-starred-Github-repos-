@@ -65,6 +65,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.indigo[400],
                   size: 55.0,
                 ),
+                SizedBox(
+                  height: 6.0,
+                ),
                 _page == 1
                     ? Container()
                     : Text(
