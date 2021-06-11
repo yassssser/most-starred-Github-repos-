@@ -23,7 +23,8 @@ class RepositoryBloc extends Bloc<RepositoryEvent, RepositoryState> {
       yield RepositoryState(requestState: StateStatus.LOADING);
 
       try {
-        final Repositories data = await githubService.getRepositories();
+        final Repositories data =
+            await githubService.getRepositories(event.page);
 
         RepositoryState repositoryState = RepositoryState(
           requestState: StateStatus.LOADED,

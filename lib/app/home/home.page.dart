@@ -6,8 +6,34 @@ import 'package:github_repo/enum/stateStatus.enum.dart';
 import 'package:github_repo/models/repository.model.dart';
 import 'package:intl/intl.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  ScrollController _scrollController = ScrollController();
+  int _page = 1;
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        ++_page;
+        context.read<RepositoryBloc>().add(LoadRepositories(page: _page));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     double _screenWidth = MediaQuery.of(context).size.width;
@@ -19,10 +45,9 @@ class HomePage extends StatelessWidget {
       ),
       body: BlocBuilder<RepositoryBloc, RepositoryState>(
         builder: (context, state) {
-          print(state.requestState);
           if (state.requestState == StateStatus.NONE) {
             // WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.read<RepositoryBloc>().add(LoadRepositories());
+            context.read<RepositoryBloc>().add(LoadRepositories(page: _page));
             // });
             return Container();
           } else if (state.requestState == StateStatus.LOADING) {
@@ -37,12 +62,21 @@ class HomePage extends StatelessWidget {
             );
           } else if (state.requestState == StateStatus.LOADED) {
             return Container(
+              color: Colors.grey[300],
               child: ListView.builder(
+                controller: _scrollController,
                 shrinkWrap: true,
                 itemCount: state.repositories?.items?.length,
                 itemBuilder: (context, index) {
+                  if (state.repositories?.items?.length == 0)
+                    return Text("No repo found for this month :)");
+
                   Item? repo = state.repositories?.items?[index];
                   return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    elevation: 3.0,
                     clipBehavior: Clip.antiAlias,
                     child: Column(
                       children: [

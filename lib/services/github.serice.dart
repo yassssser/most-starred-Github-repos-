@@ -10,13 +10,13 @@ class GithubService {
   final String _uri = "api.github.com";
   final DateTime date = DateTime.now();
 
-  Future<Repositories> getRepositories() async {
+  Future<Repositories> getRepositories(int? page) async {
     DateTime dateMunis1Month = DateTime(date.year, date.month - 1, date.day);
     String dateFormatted = DateFormat("yyyy-MM-dd").format(dateMunis1Month);
 
     var qParams = {
       "order": "desc",
-      "page": "1",
+      "page": "$page",
       "q": "created:>$dateFormatted",
       "sort": "stars",
     };

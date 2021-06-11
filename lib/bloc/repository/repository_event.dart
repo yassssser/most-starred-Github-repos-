@@ -6,5 +6,6 @@ abstract class RepositoryEvent<T> {
 }
 
 class LoadRepositories extends RepositoryEvent {
-  LoadRepositories() : super();
+  int? page;
+  LoadRepositories({this.page}) : super();
 }

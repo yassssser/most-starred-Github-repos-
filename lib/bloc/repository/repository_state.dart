@@ -5,16 +5,19 @@ class RepositoryState {
   String? errorMessage;
   RepositoryEvent? currentAction;
   Repositories? repositories;
+  // List<Item?> repo = [];
 
   RepositoryState({
     this.requestState,
     this.errorMessage,
     this.currentAction,
     this.repositories,
+    // this.repo,
   });
 
   RepositoryState.initialState() {
     this.requestState = StateStatus.NONE;
     this.repositories = Repositories();
+    // this.repo = [];
   }
 }
