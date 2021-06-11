@@ -21,7 +21,7 @@ class TextErrorWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                 ),
                 TextSpan(
-                  text: "Cliquer pour essayez $errorMessage",
+                  text: "Cliquer pour essayez \n$errorMessage",
                   style: TextStyle(color: Colors.green),
                 ),
               ],

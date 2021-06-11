@@ -52,17 +52,28 @@ class _HomePageState extends State<HomePage> {
             // });
             return Container();
           } else if (state.requestState == StateStatus.LOADING) {
-            return Center(
-              child: SpinKitCubeGrid(
-                color: Colors.indigo[400],
-                size: 55.0,
-              ),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SpinKitCubeGrid(
+                  color: Colors.indigo[400],
+                  size: 55.0,
+                ),
+                _page == 1
+                    ? Container()
+                    : Text(
+                        "page: $_page",
+                        textAlign: TextAlign.center,
+                      )
+              ],
             );
           } else if (state.requestState == StateStatus.ERROR) {
             return TextErrorWidget(
               errorMessage: state.errorMessage,
-              actionEvent: () =>
-                  context.read<RepositoryBloc>().add(LoadRepositories()),
+              actionEvent: () => context
+                  .read<RepositoryBloc>()
+                  .add(state.currentAction ?? LoadRepositories()),
             );
           } else if (state.requestState == StateStatus.LOADED) {
             return Container(
