@@ -21,9 +21,15 @@ class TextErrorWidget extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                 ),
                 TextSpan(
-                  text: "Cliquer pour essayez \n$errorMessage",
+                  text: "Cliquer pour essayez",
                   style: TextStyle(color: Colors.green),
                 ),
+                kDebugMode
+                    ? TextSpan(
+                        text: errorMessage,
+                        style: TextStyle(color: Colors.green),
+                      )
+                    : WidgetSpan(child: Container()),
               ],
             ),
           ),

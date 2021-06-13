@@ -24,7 +24,7 @@ class GithubService {
     var url = Uri.https(_uri, "/search/repositories", qParams);
 
     try {
-      final res = await http.get(url).timeout(Duration(seconds: 10),
+      final res = await http.get(url).timeout(Duration(seconds: 15),
           onTimeout: (() => throw TimeoutException(
               "Connection has timed out, Please try again!")));
       if (!(res.statusCode >= 200 && res.statusCode < 300))
